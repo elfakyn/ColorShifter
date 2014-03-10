@@ -69,7 +69,7 @@
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="intepolate.cpp" />
+    <ClCompile Include="interpolate.cpp" />
     <ClCompile Include="convertColor.cpp" />
   </ItemGroup>
   <ItemGroup>

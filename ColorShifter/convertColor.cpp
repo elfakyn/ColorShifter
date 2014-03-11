@@ -1,6 +1,7 @@
 #include <array>
 #include "colorTools.h"
 
+#define MAX2(x, y) ((x) > (y) ? (x) : (y))
 #define MIN3(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z))) 
 #define MAX3(x, y, z) ((x) > (y) ? ((x) > (z) ? (x) : (z)) : ((y) > (z) ? (y) : (z)))
 #define ABS(x) ((x) > 0 ? (x) : (0 - x))
@@ -8,11 +9,11 @@
 int* AHSVfromARGB(int argb[])
 {
 	int* ahsv = new int[4];
-	std::fill(ahsv, ahsv+4, 0);
+	std::fill(ahsv, ahsv + 4, 0);
 
 	// Calculate alpha
 	ahsv[0] = argb[0];
-	
+
 	// Calculate value
 	ahsv[3] = MAX3(argb[1], argb[2], argb[3]);
 
@@ -32,28 +33,31 @@ int* AHSVfromARGB(int argb[])
 
 	// Calculate hue
 	if (ahsv[3] == argb[1]) {
-		ahsv[1] = 0 + 43 * (argb[2] - argb[3]) / chroma;
+		ahsv[1] = 43 * (argb[2] - argb[3]) / chroma;
+		ahsv[1] = ahsv[1] >= 0 ? ahsv[1] : 255 + ahsv[1];
 	} else if (ahsv[3] == argb[2]) {
 		ahsv[1] = 85 + 43 * (argb[3] - argb[1]) / chroma;
 	} else {
 		ahsv[1] = 170 + 43 * (argb[1] - argb[2]) / chroma;
 	}
-	
+
 	return ahsv;
 }
 
 int* ARGBfromAHSV(int ahsv[])
 {
 	int* argb = new int[4];
-	std::fill(argb, argb+4, 0);
+	std::fill(argb, argb + 4, 0);
 
 	// Calculate alpha
 	argb[0] = ahsv[0];
 
-	// Calculate chroma and second largest component
-	int chroma = ahsv[3] * ahsv[2] / 255;
-	int second = (ahsv[1] - ahsv[1] / 85 * 85) * 6 - 255; // Intermediate value for efficiency
+	// Calculate chroma (largest component) and second largest component
+	int chroma = ahsv[3] * ahsv[2] / 255 + 1; // The + 1 is a kludge but it seems to do the trick
+
+	int second = (ahsv[1] % 85) * 6 - 255; // Intermediate value for efficiency
 	second = 255 - ABS(second);
+	second = second * chroma / 255;
 
 	// Determine which component is chroma and which is second by region
 	switch (ahsv[1] * 2 / 85) {
@@ -78,12 +82,12 @@ int* ARGBfromAHSV(int ahsv[])
 		break;
 	}
 
-	// Add minimum to each component to get final values
+	// Add minimum (smallest component) to each component to get final values
 	int minimum = ahsv[3] - chroma;
 
-	argb[1] = argb[1] + minimum;
-	argb[2] = argb[2] + minimum;
-	argb[3] = argb[3] + minimum;
+	argb[1] = MAX2(0, argb[1] + minimum);
+	argb[2] = MAX2(0, argb[2] + minimum);
+	argb[3] = MAX2(0, argb[3] + minimum);
 
 	return argb;
 }

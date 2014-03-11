@@ -1,6 +1,17 @@
 #include "colorTools.h"
+#include "Color.h"
 
-int interpolate(int color1, int color2, float xvalue)
+Color interpolate(Color color1, Color color2, float xvalue)
 {
-	return 0; //TODO
+	int* argb1 = color1.GetARGB;
+	int* argb2 = color2.GetARGB;
+	int argbOut[4];
+
+	for (int i = 0; i < 4; i++) {
+		argbOut[i] = int((argb2[i] - argb1[i]) * xvalue + argb1[i]);
+	}
+
+	Color colorOut;
+	colorOut.SetARGB(argbOut);
+	return colorOut;
 }

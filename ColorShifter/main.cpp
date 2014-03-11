@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include "dwmParams.h"
 
-int main()
+int main2()
 {
 	HMODULE hlib = LoadLibrary("dwmapi.dll"); // load the Window Manager API
 

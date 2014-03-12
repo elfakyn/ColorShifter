@@ -2,13 +2,13 @@
 #define DWMPARAMS_H
 
 typedef struct { // DwmColorizationParameters
-	INT color;
-	INT afterglow;
-	INT colorBalance;
-	INT afterglowBalance;
-	INT blurBalance;
-	INT glassReflectionIntensity;
-	INT opaqueBlend;
+	int color;
+	int afterglow;
+	int colorBalance;
+	int afterglowBalance;
+	int blurBalance;
+	int glassReflectionIntensity;
+	int opaqueBlend;
 } DwmColorizationParameters;
 
 #endif

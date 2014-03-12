@@ -3,15 +3,18 @@
 
 Color interpolate(Color color1, Color color2, float xvalue)
 {
-	int* argb1 = color1.GetARGB();
-	int* argb2 = color2.GetARGB();
-	int argbOut[4];
+	int* ahsv1 = color1.GetAHSV();
+	int* ahsv2 = color2.GetAHSV();
+	int ahsvOut[4], balanceOut;
 
 	for (int i = 0; i < 4; i++) {
-		argbOut[i] = int((argb2[i] - argb1[i]) * xvalue + argb1[i]);
+		ahsvOut[i] = int((ahsv2[i] - ahsv1[i]) * xvalue + ahsv1[i]);
 	}
+	balanceOut = int((color2.GetBalance() - color1.GetBalance()) * xvalue + color1.GetBalance());
 
 	Color colorOut;
-	colorOut.SetARGB(argbOut);
+	colorOut.SetAHSV(ahsvOut);
+	colorOut.SetBalance(balanceOut);
+
 	return colorOut;
 }

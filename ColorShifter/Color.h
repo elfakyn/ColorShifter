@@ -4,6 +4,7 @@
 class Color {
 private:
 	int argb[4];
+	int balance; // colorBalance
 public:
 	Color();
 
@@ -14,7 +15,10 @@ public:
 	int* GetAHSV();
 
 	void SetMerged(int); // ARGB channels merged into an int 0xAARRGGBB
-	int  GetMerged();
+	int GetMerged();
+
+	void SetBalance(int);
+	int GetBalance();
 };
 
 #endif

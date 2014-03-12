@@ -38,10 +38,16 @@
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\colorTools</Filter>
     </ClCompile>
-    <ClCompile Include="convertColor.cpp">
+    <ClCompile Include="interpolate.cpp">
       <Filter>Source Files\colorTools</Filter>
     </ClCompile>
-    <ClCompile Include="interpolate.cpp">
+    <ClCompile Include="transition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ARGBtofromAHSV.cpp">
+      <Filter>Source Files\colorTools</Filter>
+    </ClCompile>
+    <ClCompile Include="importexportColor.cpp">
       <Filter>Source Files\colorTools</Filter>
     </ClCompile>
   </ItemGroup>

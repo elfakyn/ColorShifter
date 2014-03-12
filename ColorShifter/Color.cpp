@@ -5,6 +5,7 @@
 Color::Color()
 {
 	std::array<int, 4> argb = { 0 };
+	balance = 100;
 }
 
 void Color::SetARGB(int *argbIn)
@@ -39,4 +40,14 @@ void Color::SetMerged(int merged)
 int Color::GetMerged()
 {
 	return (argb[0] << 24) | (argb[1] << 16) | (argb[2] << 8) | argb[3];
+}
+
+void Color::SetBalance(int balanceIn)
+{
+	balance = balanceIn;
+}
+
+int Color::GetBalance()
+{
+	return balance;
 }

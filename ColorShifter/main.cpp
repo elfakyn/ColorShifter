@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "dwmParams.h"
+#include "Color.h"
 
 int main()
 {

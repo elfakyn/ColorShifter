@@ -5,6 +5,7 @@
 #define MIN3(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z))) 
 #define MAX3(x, y, z) ((x) > (y) ? ((x) > (z) ? (x) : (z)) : ((y) > (z) ? (y) : (z)))
 #define ABS(x) ((x) > 0 ? (x) : (0 - x))
+#define DIVCEIL(x, y) ((x + y - 1) / y) // AHSVfromARGB rounds down, so ARGBfromAHSV will round up to compensate
 
 int* AHSVfromARGB(int argb[])
 {
@@ -53,11 +54,11 @@ int* ARGBfromAHSV(int ahsv[])
 	argb[0] = ahsv[0];
 
 	// Calculate chroma (largest component) and second largest component
-	int chroma = ahsv[3] * ahsv[2] / 255 + 1; // The + 1 is a kludge but it seems to do the trick
+	int chroma = DIVCEIL(ahsv[3] * ahsv[2], 255);
 
-	int second = (ahsv[1] % 85) * 6 - 255; // Intermediate value for efficiency
+	int second = (ahsv[1] % 85) * 6 - 255;
 	second = 255 - ABS(second);
-	second = second * chroma / 255;
+	second = DIVCEIL(second * chroma, 255);
 
 	// Determine which component is chroma and which is second by region
 	switch (ahsv[1] * 2 / 85) {
@@ -85,9 +86,9 @@ int* ARGBfromAHSV(int ahsv[])
 	// Add minimum (smallest component) to each component to get final values
 	int minimum = ahsv[3] - chroma;
 
-	argb[1] = MAX2(0, argb[1] + minimum);
-	argb[2] = MAX2(0, argb[2] + minimum);
-	argb[3] = MAX2(0, argb[3] + minimum);
+	argb[1] = argb[1] + minimum;
+	argb[2] = argb[2] + minimum;
+	argb[3] = argb[3] + minimum;
 
 	return argb;
 }

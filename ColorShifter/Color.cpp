@@ -1,6 +1,5 @@
 #include <array>
 #include "colorTools.h"
-#include "Color.h"
 
 Color::Color()
 {

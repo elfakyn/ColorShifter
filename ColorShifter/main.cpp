@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Windows.h>
-#include "dwmParams.h"
-#include "Color.h"
+#include "colorTools.h"
+#include "transitionTools.h"
 
 int main()
 {
@@ -12,8 +12,8 @@ int main()
 		return -1;
 	}
 
-	typedef VOID(*DwmSetColorizationParametersProc) (DwmColorizationParameters *);
-	typedef VOID(*DwmGetColorizationParametersProc) (DwmColorizationParameters *);
+	typedef void(*DwmSetColorizationParametersProc) (DwmColorizationParameters *);
+	typedef void(*DwmGetColorizationParametersProc) (DwmColorizationParameters *);
 
 	DwmGetColorizationParametersProc DwmGetColorizationParameters =
 		(DwmGetColorizationParametersProc)GetProcAddress(hlib, (LPCSTR)127); // Microsoft calls it DwmGetColorizationParameters
@@ -27,8 +27,14 @@ int main()
 		std::cerr << "Could not load DwmSetColorizationParameters" << std::endl;
 	}
 
-	DwmColorizationParameters currentColors = { 0xffff0000, 0, 30, 0, 0, 0, 0 };
-	DwmSetColorizationParameters(&currentColors);
+	Color color1, color2;
+	color1.SetMerged(0xFFFF0000);
+	color1.SetBalance(50);
+	color2.SetMerged(0xFF0000FF);
+	color2.SetBalance(50);
 
+	singleTransition(color1, color2, 100, 500, DwmSetColorizationParameters);
+	int x;
+	std::cin >> x;
 	return 0;
 }

@@ -67,17 +67,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="color.cpp" />
     <ClCompile Include="importexportColor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="interpolate.cpp" />
     <ClCompile Include="ARGBtofromAHSV.cpp" />
-    <ClCompile Include="transition.cpp" />
+    <ClCompile Include="singleTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Color.h" />
     <ClInclude Include="colorTools.h" />
-    <ClInclude Include="dwmParams.h" />
+    <ClInclude Include="transitionTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

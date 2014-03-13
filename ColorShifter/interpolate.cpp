@@ -1,7 +1,6 @@
 #include "colorTools.h"
-#include "Color.h"
 
-Color interpolate(Color color1, Color color2, float xvalue)
+Color interpolate(Color color1, Color color2, double xvalue)
 {
 	int* ahsv1 = color1.GetAHSV();
 	int* ahsv2 = color2.GetAHSV();

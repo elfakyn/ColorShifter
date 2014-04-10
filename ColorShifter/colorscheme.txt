@@ -1,0 +1,4 @@
+ffff00ff
+ff00ffff 100 30
+ffff0000 100 30
+ff00ff00 50  30

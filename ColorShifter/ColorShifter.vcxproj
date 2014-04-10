@@ -78,6 +78,9 @@
     <ClInclude Include="colorTools.h" />
     <ClInclude Include="transitionTools.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="colorscheme.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

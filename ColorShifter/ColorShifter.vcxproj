@@ -68,13 +68,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp" />
-    <ClCompile Include="dllTools.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="colorTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorTools.h" />
     <ClInclude Include="dllTools.h" />
+    <ClInclude Include="exitCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="colorscheme.txt" />

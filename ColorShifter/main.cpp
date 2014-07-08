@@ -2,18 +2,16 @@
 #include <iostream>
 #include "colorTools.h"
 #include "dllTools.h"
+#include "exitCodes.h"
 
-HMODULE hlib;
 int main()
 {
-	hlib = LoadLibrary("dwmapi.dll"); // load the Window Manager API
+	HRESULT(WINAPI *setDwmColors) (DwmColor *color, UINT unknown);
+	HRESULT(WINAPI *getDwmColors) (DwmColor *color);
 
-	if (!hlib) {
-		std::cerr << "Could not load dwmapi.dll" << std::endl;
-		return -1;
+	if (!loadDwmDll(setDwmColors, getDwmColors)) {
+		exit(EXIT_DLL_LOAD_FAIL);
 	}
-	*(FARPROC *)&DwmGetColorizationParameters = GetProcAddress(hlib, (LPCSTR)127);
-	*(FARPROC *)&DwmSetColorizationParameters = GetProcAddress(hlib, (LPCSTR)131);
 
 	std::ifstream readColor;
 	readColor.open("colorscheme.txt");
@@ -23,10 +21,9 @@ int main()
 	DwmColor crt = { 0 };
 
 	readColor >> std::hex >> currentColorValue;
-	std::cout << std::hex << currentColorValue << std::endl;
 	color1.SetMerged(currentColorValue);
 	crt = exportColor(color1);
-	DwmSetColorizationParameters(&crt, 0);
+	setDwmColors(&crt, 0);
 
 
 	while (!readColor.eof()) {
@@ -34,7 +31,7 @@ int main()
 		color2.SetMerged(currentColorValue);
 		for (int i = 0; i < steps; i++) {
 			crt = exportColor(interpolate(color1, color2, i * 1.0 / steps));
-			DwmSetColorizationParameters(&crt, 0);
+			setDwmColors(&crt, 0);
 			Sleep(wait_ms);
 		}
 

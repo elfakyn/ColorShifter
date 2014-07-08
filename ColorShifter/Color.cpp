@@ -1,39 +1,37 @@
 #include "colorTools.h"
-#include <iostream>
-using namespace std;
 
 Color::Color()
 {
-	uchar4 argb = { 0 };
+	int4 argb = { 0 };
 	unsigned char balance = 0;
 }
 
-void Color::SetARGB(uchar4 argb_)
+void Color::SetARGB(int4 argb_)
 {
 	argb = argb_;
 }
 
-uchar4 Color::GetARGB()
+int4 Color::GetARGB()
 {
 	return argb;
 }
 
-void Color::SetAHSV(uchar4 ahsv)
+void Color::SetAHSV(int4 ahsv)
 {
 	argb = ARGBfromAHSV(ahsv);
 }
 
-uchar4 Color::GetAHSV()
+int4 Color::GetAHSV()
 {
 	return AHSVfromARGB(argb);
 }
 
 void Color::SetMerged(int merged)
 {
-	argb.w = (unsigned char)((merged >> 24) & 0xFF);
-	argb.x = (unsigned char)((merged >> 16) & 0xFF);
-	argb.y = (unsigned char)((merged >> 8) & 0xFF);
-	argb.z = (unsigned char)(merged & 0xFF);
+	argb.w = (merged >> 24) & 0xFF;
+	argb.x = (merged >> 16) & 0xFF;
+	argb.y = (merged >> 8) & 0xFF;
+	argb.z = merged & 0xFF;
 }
 
 int Color::GetMerged()
@@ -44,12 +42,12 @@ int Color::GetMerged()
 		argb.z;
 }
 
-void Color::SetBalance(unsigned char balanceIn)
+void Color::SetBalance(int balanceIn)
 {
 	balance = balanceIn;
 }
 
-unsigned char Color::GetBalance()
+int Color::GetBalance()
 {
 	return balance;
 }

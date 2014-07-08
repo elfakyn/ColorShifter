@@ -11,36 +11,36 @@ typedef struct {
 } DwmColor;
 
 typedef struct {
-	unsigned char w;
-	unsigned char x;
-	unsigned char y;
-	unsigned char z;
-} uchar4;
+	int w;
+	int x;
+	int y;
+	int z;
+} int4;
 
 class Color {
 private:
-	uchar4 argb;
-	unsigned char balance; // colorBalance
+	int4 argb;
+	int balance; // colorBalance
 public:
 	Color();
 
-	void SetARGB(uchar4); // Alpha Red Green Blue
-	uchar4 GetARGB();
+	void SetARGB(int4); // Alpha Red Green Blue
+	int4 GetARGB();
 
-	void SetAHSV(uchar4); // Alpha Hue Saturation Value
-	uchar4 GetAHSV();
+	void SetAHSV(int4); // Alpha Hue Saturation Value
+	int4 GetAHSV();
 
 	void SetMerged(int); // ARGB channels merged into an int 0xAARRGGBB
 	int GetMerged();
 
-	void SetBalance(unsigned char);
-	unsigned char GetBalance();
+	void SetBalance(int);
+	int GetBalance();
 };
 
 Color interpolate(Color, Color, double);
 
-uchar4 AHSVfromARGB(uchar4);
-uchar4 ARGBfromAHSV(uchar4);
+int4 AHSVfromARGB(int4);
+int4 ARGBfromAHSV(int4);
 
 Color importColor(DwmColor);
 DwmColor exportColor(Color);

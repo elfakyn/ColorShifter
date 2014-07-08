@@ -47,6 +47,7 @@
       <SDLCheck>true</SDLCheck>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,12 +69,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="dllTools.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="colorTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorTools.h" />
-    <ClInclude Include="transitionTools.h" />
+    <ClInclude Include="dllTools.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="colorscheme.txt" />

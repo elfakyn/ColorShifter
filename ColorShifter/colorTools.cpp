@@ -1,17 +1,14 @@
 #include "colorTools.h"
-#include <iostream>
-using namespace std;
 
 #define MAX2(x, y) ((x) > (y) ? (x) : (y))
-#define MIN3(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z))) 
+#define MIN3(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z)))
 #define MAX3(x, y, z) ((x) > (y) ? ((x) > (z) ? (x) : (z)) : ((y) > (z) ? (y) : (z)))
 #define ABS(x) ((x) > 0 ? (x) : (0 - (x)))
 #define DIVCEIL(x, y) (((x) + (y) - 1) / (y)) // AHSVfromARGB rounds down, so ARGBfromAHSV will round up to compensate
 
-uchar4 AHSVfromARGB(uchar4 argb)
+int4 AHSVfromARGB(int4 argb)
 {
-	uchar4 ahsv;
-
+	int4 ahsv = { 0 };
 	// Calculate alpha
 	ahsv.w = argb.w;
 
@@ -45,10 +42,9 @@ uchar4 AHSVfromARGB(uchar4 argb)
 	return ahsv;
 }
 
-uchar4 ARGBfromAHSV(uchar4 ahsv)
+int4 ARGBfromAHSV(int4 ahsv)
 {
-	uchar4 argb;
-
+	int4 argb = { 0 };
 	// Calculate alpha
 	argb.w = ahsv.w;
 
@@ -92,15 +88,14 @@ uchar4 ARGBfromAHSV(uchar4 ahsv)
 	return argb;
 }
 
-#define INTERPOLATE(A1, A2, XVALUE) (unsigned char)((XVALUE) * ((A2) - (A1)) + 1.0 * (A1))
+#define INTERPOLATE(A1, A2, XVALUE) (int)((XVALUE) * ((A2) - (A1)) + 1.0 * (A1))
 
 Color interpolate(Color color1, Color color2, double xvalue)
 {
-	uchar4 ahsv1 = color1.GetAHSV();
-	uchar4 ahsv2 = color2.GetAHSV();
-	uchar4 ahsvOut;
+	int4 ahsv1 = color1.GetAHSV();//
+	int4 ahsv2 = color2.GetAHSV();/////FIXME
+	int4 ahsvOut;
 	int balanceOut;
-
 
 	ahsvOut.w = INTERPOLATE(ahsv1.w, ahsv2.w, xvalue);
 	ahsvOut.x = INTERPOLATE(ahsv1.x, ahsv2.x, xvalue);
@@ -109,8 +104,9 @@ Color interpolate(Color color1, Color color2, double xvalue)
 	balanceOut = INTERPOLATE(color1.GetBalance(), color2.GetBalance(), xvalue);
 
 	Color colorOut;
-	colorOut.SetAHSV(ahsvOut);
-	colorOut.SetBalance(balanceOut);
+
+	colorOut.SetAHSV(ahsvOut);///FIXME
+	colorOut.SetBalance(0x64);
 
 	return colorOut;
 }
@@ -128,6 +124,5 @@ DwmColor exportColor(Color in)
 	DwmColor out = { 0 };
 	out.color = in.GetMerged();
 	out.colorBalance = in.GetBalance();
-	cout << hex << out.color << " " << out.colorBalance << endl;
 	return out;
 }

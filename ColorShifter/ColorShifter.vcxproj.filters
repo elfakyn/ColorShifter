@@ -24,7 +24,7 @@
     <ClInclude Include="colorTools.h">
       <Filter>Header Files\colorTools</Filter>
     </ClInclude>
-    <ClInclude Include="transitionTools.h">
+    <ClInclude Include="dllTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="colorTools.cpp">
       <Filter>Source Files\colorTools</Filter>
+    </ClCompile>
+    <ClCompile Include="dllTools.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

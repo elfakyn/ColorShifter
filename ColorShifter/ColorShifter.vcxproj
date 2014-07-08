@@ -47,7 +47,6 @@
       <SDLCheck>true</SDLCheck>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
-      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

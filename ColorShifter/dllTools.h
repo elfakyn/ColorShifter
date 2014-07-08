@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include "colorTools.h"
+
 HRESULT(WINAPI *DwmSetColorizationParameters) (DwmColor *color, UINT unknown);
 HRESULT(WINAPI *DwmGetColorizationParameters) (DwmColor *color);
 

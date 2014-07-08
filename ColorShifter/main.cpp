@@ -3,8 +3,6 @@
 #include "colorTools.h"
 #include "dllTools.h"
 
-
-
 HMODULE hlib;
 int main()
 {
@@ -29,7 +27,7 @@ int main()
 	crt = exportColor(color1);
 	DwmSetColorizationParameters(&crt, 0);
 
-
+	while (1);
 	while (!readColor.eof()) {
 		readColor >> std::hex >> currentColorValue >> std::dec >> steps >> wait_ms;
 		color2.SetMerged(currentColorValue);

@@ -12,20 +12,22 @@ int main()
 		std::cerr << "Could not load dwmapi.dll" << std::endl;
 		return -1;
 	}
-	*(FARPROC *)&DwmSetColorizationParameters = GetProcAddress(hlib, (LPCSTR)127);
-	*(FARPROC *)&DwmGetColorizationParameters = GetProcAddress(hlib, (LPCSTR)131);
+	*(FARPROC *)&DwmGetColorizationParameters = GetProcAddress(hlib, (LPCSTR)127);
+	*(FARPROC *)&DwmSetColorizationParameters = GetProcAddress(hlib, (LPCSTR)131);
 
 	std::ifstream readColor;
 	readColor.open("colorscheme.txt");
 
 	Color color1, color2;
-	int steps, wait_ms, currentColorValue;
+	unsigned int steps, wait_ms, currentColorValue;
 	DwmColor crt = { 0 };
 
 	readColor >> std::hex >> currentColorValue;
+	std::cout << std::hex << currentColorValue << std::endl;
 	color1.SetMerged(currentColorValue);
 	crt = exportColor(color1);
 	DwmSetColorizationParameters(&crt, 0);
+
 
 	while (!readColor.eof()) {
 		readColor >> std::hex >> currentColorValue >> std::dec >> steps >> wait_ms;
@@ -41,5 +43,5 @@ int main()
 
 	return 0;
 
-//	singleTransition(color1, color2, 100, 500, DwmSetColorizationParameters);
+	//	singleTransition(color1, color2, 100, 500, DwmSetColorizationParameters);
 }

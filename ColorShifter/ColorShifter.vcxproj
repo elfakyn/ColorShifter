@@ -68,11 +68,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp" />
-    <ClCompile Include="importexportColor.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="interpolate.cpp" />
-    <ClCompile Include="ARGBtofromAHSV.cpp" />
-    <ClCompile Include="singleTransition.cpp" />
+    <ClCompile Include="colorTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorTools.h" />

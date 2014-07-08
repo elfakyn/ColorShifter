@@ -1,52 +1,55 @@
-#include <array>
 #include "colorTools.h"
+#include <iostream>
+using namespace std;
 
 Color::Color()
 {
-	std::array<int, 4> argb = { 0 };
-	balance = 100;
+	uchar4 argb = { 0 };
+	unsigned char balance = 0;
 }
 
-void Color::SetARGB(int *argbIn)
+void Color::SetARGB(uchar4 argb_)
 {
-	std::copy(argbIn, argbIn + 4, argb);
+	argb = argb_;
 }
 
-int* Color::GetARGB()
+uchar4 Color::GetARGB()
 {
 	return argb;
 }
 
-void Color::SetAHSV(int *ahsv)
+void Color::SetAHSV(uchar4 ahsv)
 {
-	int* argbIn = ARGBfromAHSV(ahsv);
-	std::copy(argbIn, argbIn + 4, argb);
+	argb = ARGBfromAHSV(ahsv);
 }
 
-int* Color::GetAHSV()
+uchar4 Color::GetAHSV()
 {
 	return AHSVfromARGB(argb);
 }
 
 void Color::SetMerged(int merged)
 {
-	argb[0] = (merged >> 24) & 0xFF;
-	argb[1] = (merged >> 16) & 0xFF;
-	argb[2] = (merged >> 8) & 0xFF;
-	argb[3] = merged & 0xFF;
+	argb.w = (unsigned char)((merged >> 24) & 0xFF);
+	argb.x = (unsigned char)((merged >> 16) & 0xFF);
+	argb.y = (unsigned char)((merged >> 8) & 0xFF);
+	argb.z = (unsigned char)(merged & 0xFF);
 }
 
 int Color::GetMerged()
 {
-	return (argb[0] << 24) | (argb[1] << 16) | (argb[2] << 8) | argb[3];
+	return (argb.w << 24) |
+		(argb.x << 16) |
+		(argb.y << 8) |
+		argb.z;
 }
 
-void Color::SetBalance(int balanceIn)
+void Color::SetBalance(unsigned char balanceIn)
 {
 	balance = balanceIn;
 }
 
-int Color::GetBalance()
+unsigned char Color::GetBalance()
 {
 	return balance;
 }

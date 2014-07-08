@@ -1,7 +1,6 @@
-#ifndef DWMPARAMS
-#define DWMPARAMS
+#pragma once
 
-typedef struct { // DwmColorizationParameters
+typedef struct {
 	int color;
 	int afterglow;
 	int colorBalance;
@@ -9,39 +8,39 @@ typedef struct { // DwmColorizationParameters
 	int blurBalance;
 	int glassReflectionIntensity;
 	int opaqueBlend;
-} DwmColorizationParameters;
+} DwmColor;
 
-#endif
-
-#ifndef COLOR
-#define COLOR
+typedef struct {
+	unsigned char w;
+	unsigned char x;
+	unsigned char y;
+	unsigned char z;
+} uchar4;
 
 class Color {
 private:
-	int argb[4];
-	int balance; // colorBalance
+	uchar4 argb;
+	unsigned char balance; // colorBalance
 public:
 	Color();
 
-	void SetARGB(int[]); // Alpha Red Green Blue
-	int* GetARGB();
+	void SetARGB(uchar4); // Alpha Red Green Blue
+	uchar4 GetARGB();
 
-	void SetAHSV(int[]); // Alpha Hue Saturation Value
-	int* GetAHSV();
+	void SetAHSV(uchar4); // Alpha Hue Saturation Value
+	uchar4 GetAHSV();
 
 	void SetMerged(int); // ARGB channels merged into an int 0xAARRGGBB
 	int GetMerged();
 
-	void SetBalance(int);
-	int GetBalance();
+	void SetBalance(unsigned char);
+	unsigned char GetBalance();
 };
-
-#endif
 
 Color interpolate(Color, Color, double);
 
-extern int* AHSVfromARGB(int*);
-extern int* ARGBfromAHSV(int*);
+uchar4 AHSVfromARGB(uchar4);
+uchar4 ARGBfromAHSV(uchar4);
 
-Color importColor(DwmColorizationParameters);
-DwmColorizationParameters exportColor(Color);
+Color importColor(DwmColor);
+DwmColor exportColor(Color);

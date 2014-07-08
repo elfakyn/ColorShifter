@@ -32,20 +32,11 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interpolate.cpp">
-      <Filter>Source Files\colorTools</Filter>
-    </ClCompile>
-    <ClCompile Include="ARGBtofromAHSV.cpp">
-      <Filter>Source Files\colorTools</Filter>
-    </ClCompile>
-    <ClCompile Include="importexportColor.cpp">
-      <Filter>Source Files\colorTools</Filter>
-    </ClCompile>
     <ClCompile Include="color.cpp">
       <Filter>Source Files\colorTools</Filter>
     </ClCompile>
-    <ClCompile Include="singleTransition.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="colorTools.cpp">
+      <Filter>Source Files\colorTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

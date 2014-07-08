@@ -6,8 +6,8 @@ typedef HRESULT(WINAPI*DwmSetColorizationParametersProc) (DwmColorizationParamet
 typedef HRESULT(WINAPI*DwmGetColorizationParametersProc) (DwmColorizationParameters *);
 */
 
-HRESULT(WINAPI *DwmSetColorizationParameters) (DwmColorizationParameters *color, UINT unknown);
-HRESULT(WINAPI *DwmGetColorizationParameters) (DwmColorizationParameters *color);
+HRESULT(WINAPI *DwmSetColorizationParameters) (DwmColor *color, UINT unknown);
+HRESULT(WINAPI *DwmGetColorizationParameters) (DwmColor *color);
 
 
 #endif

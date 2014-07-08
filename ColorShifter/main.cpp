@@ -21,7 +21,7 @@ int main()
 
 	Color color1, color2;
 	unsigned int steps, wait_ms, currentColorValue;
-	DwmColorizationParameters crt = { 0 };
+	DwmColor crt = { 0 };
 
 	readColor >> std::hex >> currentColorValue;
 	std::cout << std::hex << currentColorValue << std::endl;
@@ -34,7 +34,8 @@ int main()
 		readColor >> std::hex >> currentColorValue >> std::dec >> steps >> wait_ms;
 		color2.SetMerged(currentColorValue);
 		for (int i = 0; i < steps; i++) {
-			crt = exportColor(interpolate(color1, color2, i * 1.0 / steps));
+			crt.color = 0xFF10FFFF;//exportColor(interpolate(color1, color2, i * 1.0 / steps));
+			crt.colorBalance = 0xCC;
 			DwmSetColorizationParameters(&crt, 0);
 			Sleep(wait_ms);
 		}

@@ -41,6 +41,9 @@
     <ClCompile Include="colorTools.cpp">
       <Filter>Source Files\colorTools</Filter>
     </ClCompile>
+    <ClCompile Include="interpolate.cpp">
+      <Filter>Source Files\colorTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="colorscheme.txt" />

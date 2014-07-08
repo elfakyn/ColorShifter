@@ -6,11 +6,18 @@
 
 int main()
 {
+	HRESULT(WINAPI *getDwmStatus) (BOOL *ok);
 	HRESULT(WINAPI *setDwmColors) (DwmColor *color, UINT unknown);
 	HRESULT(WINAPI *getDwmColors) (DwmColor *color);
 
-	if (!loadDwmDll(setDwmColors, getDwmColors)) {
+	if (!loadDwmDll(getDwmStatus, setDwmColors, getDwmColors)) {
 		exit(EXIT_DLL_LOAD_FAIL);
+	}
+
+	BOOL ok;
+	getDwmStatus(&ok);
+	if (!ok) {
+		exit(EXIT_COMPOSITION_DISABLED);
 	}
 
 	std::ifstream readColor;
@@ -38,7 +45,5 @@ int main()
 		color1 = color2;
 	}
 
-	return 0;
-
-	//	singleTransition(color1, color2, 100, 500, DwmSetColorizationParameters);
+	exit(EXIT_OK);
 }
